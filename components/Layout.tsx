@@ -3,9 +3,11 @@ import Header from './Header';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<Stack spacing={0} bg="brand.bg" w="100vw" h="100vh">
+		<Stack spacing={0} bg="background.main" w="100vw" h="100vh">
 			<Header />
-			<Flex flexGrow={1}>{children}</Flex>
+			<Flex flexGrow={1} overflowY="auto">
+				{children}
+			</Flex>
 		</Stack>
 	);
 }

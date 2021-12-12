@@ -17,7 +17,7 @@ export default function Header() {
 				fontSize="xl"
 				fontWeight="Bold"
 			>
-				Awesome Blog
+				Awesome Notes
 			</Text>
 			<HStack>
 				<NavLink to="/" end prefetch="intent">
@@ -25,11 +25,10 @@ export default function Header() {
 						py={1}
 						px={3}
 						rounded="md"
-						_hover={{ bg: '#eee' }}
-						fontWeight="light"
-						color="brand.text"
+						_hover={{ bg: 'primary.50' }}
+						color="primary.600"
 					>
-						Blogs
+						Notes
 					</Text>
 				</NavLink>
 			</HStack>
