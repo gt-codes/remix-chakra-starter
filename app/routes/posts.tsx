@@ -11,7 +11,7 @@ import { Post } from '../../types';
 
 export const loader: LoaderFunction = async () => {
 	const posts = await getAllPosts();
-	return posts.slice(0, 50);
+	return posts.slice(0, 100);
 };
 
 export default function Posts() {
