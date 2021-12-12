@@ -1,19 +1,24 @@
-import { Center, Text, Box, Heading, Flex, Stack } from '@chakra-ui/react';
+import { Center, Text, Heading, Stack, Grid } from '@chakra-ui/react';
 import type { MetaFunction, LoaderFunction } from 'remix';
-import { useLoaderData, json, Link } from 'remix';
+import { useLoaderData, Link } from 'remix';
+import { getAllPosts } from '../../lib';
+import { Post } from '../../types';
 
-export let loader: LoaderFunction = () => {
-	return null;
+export const loader: LoaderFunction = async () => {
+	const posts = await getAllPosts();
+	return posts.slice(0, 50);
 };
 
-export let meta: MetaFunction = () => {
+export const meta: MetaFunction = () => {
 	return {
-		title: 'Remix Starter',
-		description: 'Welcome to remix!',
+		title: 'Awesome Notes',
+		description: 'A bunch of notes from awesome people!',
 	};
 };
 
 export default function Index() {
+	const data = useLoaderData<Post[]>();
+
 	return (
 		<Center w="full">
 			<Stack spacing={16} alignItems="center" w="5xl" p={12} h="full">
@@ -24,9 +29,24 @@ export default function Index() {
 					fontSize="3xl"
 					fontWeight="Bold"
 				>
-					Welcome to my Awesome Blog
+					A Curated List of Awesome Notes
 				</Heading>
-				<Box>hi</Box>
+				<Grid gap={3} templateColumns="repeat(3,1fr)" w="full" pb={8}>
+					{data.map((el) => (
+						<Link key={el.id} to={`/posts/${el.id}`}>
+							<Text
+								p={3}
+								rounded="md"
+								border="1px"
+								borderColor="gray.200"
+								transition="all .2s "
+								_hover={{ shadow: 'md' }}
+							>
+								Issue #{el.id}
+							</Text>
+						</Link>
+					))}
+				</Grid>
 			</Stack>
 		</Center>
 	);
