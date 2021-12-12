@@ -31,6 +31,17 @@ export default function Header() {
 						Notes
 					</Text>
 				</NavLink>
+				<NavLink to="/posts" prefetch="intent">
+					<Text
+						py={1}
+						px={3}
+						rounded="md"
+						_hover={{ bg: 'primary.50' }}
+						color="primary.600"
+					>
+						Create
+					</Text>
+				</NavLink>
 			</HStack>
 		</HStack>
 	);
