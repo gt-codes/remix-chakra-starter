@@ -1,13 +1,4 @@
-import {
-	Link,
-	Links,
-	LiveReload,
-	Meta,
-	Outlet,
-	Scripts,
-	ScrollRestoration,
-	useCatch,
-} from 'remix';
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix';
 import { ChakraProvider } from '@chakra-ui/react';
 import { theme } from '../theme';
 import Layout from '../components/Layout';
@@ -27,17 +18,14 @@ export default function App() {
 export function ErrorBoundary({ error }: { error: Error }) {
 	console.error(error);
 	return (
-		<Document title="Error!">
+		<Document title='Error!'>
 			<ChakraProvider theme={theme}>
 				<Layout>
 					<div>
 						<h1>There was an error</h1>
 						<p>{error.message}</p>
 						<hr />
-						<p>
-							Hey, developer, you should replace this with what you want your
-							users to see.
-						</p>
+						<p>Hey, developer, you should replace this with what you want your users to see.</p>
 					</div>
 				</Layout>
 			</ChakraProvider>
@@ -51,17 +39,10 @@ export function CatchBoundary() {
 	let message;
 	switch (caught.status) {
 		case 401:
-			message = (
-				<p>
-					Oops! Looks like you tried to visit a page that you do not have access
-					to.
-				</p>
-			);
+			message = <p>Oops! Looks like you tried to visit a page that you do not have access to.</p>;
 			break;
 		case 404:
-			message = (
-				<p>Oops! Looks like you tried to visit a page that does not exist.</p>
-			);
+			message = <p>Oops! Looks like you tried to visit a page that does not exist.</p>;
 			break;
 
 		default:
@@ -82,18 +63,12 @@ export function CatchBoundary() {
 	);
 }
 
-function Document({
-	children,
-	title,
-}: {
-	children: React.ReactNode;
-	title?: string;
-}) {
+function Document({ children, title }: { children: React.ReactNode; title?: string }) {
 	return (
-		<html lang="en">
+		<html lang='en'>
 			<head>
-				<meta charSet="utf-8" />
-				<meta name="viewport" content="width=device-width,initial-scale=1" />
+				<meta charSet='utf-8' />
+				<meta name='viewport' content='width=device-width,initial-scale=1' />
 				{title ? <title>{title}</title> : null}
 				<Meta />
 				<Links />
