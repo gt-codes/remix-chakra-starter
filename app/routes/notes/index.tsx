@@ -59,7 +59,7 @@ export default function Index() {
 	const loading = state === 'submitting';
 
 	useEffect(() => {
-		if (state === 'idle') isOpen && onClose();
+		if (state === 'idle' && !errors) isOpen && onClose();
 	}, [state]);
 
 	return (
