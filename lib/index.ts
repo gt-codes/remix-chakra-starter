@@ -1,26 +1,26 @@
-import { Post } from '../types';
+import { Note } from '../types';
 
-export const createPost = async (data: { title: string; body: string; userId: number }): Promise<Post> => {
+export const createNote = async (data: { title: string; body: string; userId: number }): Promise<Note> => {
 	const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
 		method: 'POST',
 		body: JSON.stringify(data),
 		headers: { 'Content-type': 'application/json; charset=UTF-8' },
 	});
-	const newPost = await res.json();
-	return newPost;
+	const newNote = await res.json();
+	return newNote;
 };
 
-export const getAllPosts = async () => {
-	const posts = await fetch('https://jsonplaceholder.typicode.com/posts');
-	const data = await posts.json();
-	const promises = data.map(async (post: Post) => await getUser(post.userId));
+export const getAllNotes = async () => {
+	const notes = await fetch('https://jsonplaceholder.typicode.com/posts');
+	const data = await notes.json();
+	const promises = data.map(async (note: Note) => await getUser(note.userId));
 	const users = await Promise.all(promises);
-	return data.map((post: Post, idx: number) => ({ ...post, user: users[idx] }));
+	return data.map((note: Note, idx: number) => ({ ...note, user: users[idx] }));
 };
 
-export const getPost = async (id: string) => {
-	const posts = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-	const data = await posts.json();
+export const getNote = async (id: string) => {
+	const notes = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+	const data = await notes.json();
 	const user = await getUser(data.userId);
 	return { ...data, user };
 };

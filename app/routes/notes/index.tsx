@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { ActionFunction, Form, LoaderFunction, redirect, useActionData, useLoaderData, useTransition } from 'remix';
-import { createPost, getAllUsers } from '../../../lib';
+import { createNote, getAllUsers } from '../../../lib';
 
 interface Errors {
 	title?: string;
@@ -39,8 +39,8 @@ export const action: ActionFunction = async ({ request }) => {
 	if (!content) errors.content = 'Content is required';
 
 	if (Object.keys(errors).length) return errors;
-	await createPost({ title, body: content, userId });
-	return redirect('/posts');
+	await createNote({ title, body: content, userId });
+	return redirect('/notes');
 };
 
 export const loader: LoaderFunction = async () => {
@@ -68,10 +68,10 @@ export default function Index() {
 				Hey there 👋
 			</Text>
 			<Text textAlign='center' fontSize={18} fontWeight='light'>
-				Select a post on the left to view it or create one below!
+				Select a note on the left to view it or create one below!
 			</Text>
 			<Button mt={6} px={24} _hover={{}} ref={finalFocus} bg='primary.600' color='white' onClick={onOpen}>
-				Create a post
+				Create a note
 			</Button>
 			<Modal
 				isOpen={isOpen}
@@ -82,7 +82,7 @@ export default function Index() {
 				<ModalOverlay />
 				<ModalContent>
 					<Form action='.' method='post'>
-						<ModalHeader>New Post</ModalHeader>
+						<ModalHeader>New Note</ModalHeader>
 						<ModalCloseButton />
 						<ModalBody>
 							<Stack spacing={4}>
