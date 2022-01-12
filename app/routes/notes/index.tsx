@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { ActionFunction, Form, LoaderFunction, redirect, useActionData, useLoaderData, useTransition } from 'remix';
-import { createNote, getAllUsers } from '../../../lib';
+import { createNote, getAllUsers } from '~/lib';
 
 interface Errors {
 	title?: string;

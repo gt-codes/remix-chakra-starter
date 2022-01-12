@@ -1,7 +1,7 @@
 import { HStack, Stack, Box, Flex } from '@chakra-ui/react';
 import { LoaderFunction, Outlet, Link, useLoaderData, useLocation } from 'remix';
-import { getAllNotes } from '../../lib';
-import { Note } from '../../types';
+import { getAllNotes } from '~/lib';
+import { Note } from '~/types';
 
 export const loader: LoaderFunction = async () => {
 	const notes = await getAllNotes();

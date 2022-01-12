@@ -1,7 +1,7 @@
 import { Box, Heading, HStack, IconButton, Stack, Text } from '@chakra-ui/react';
 import { LoaderFunction, useLoaderData } from 'remix';
-import { getNote } from '../../../lib';
-import { Note } from '../../../types';
+import { getNote } from '~/lib';
+import { Note } from '~/types';
 import { MdOutlineEmail, MdPhone, MdLink } from 'react-icons/md';
 
 export const loader: LoaderFunction = async ({ params }) => {

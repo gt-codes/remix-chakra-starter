@@ -1,4 +1,4 @@
-import { Note } from '../types';
+import { Note } from '~/types';
 
 export const createNote = async (data: { title: string; body: string; userId: number }): Promise<Note> => {
 	const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
