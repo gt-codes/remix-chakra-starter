@@ -1,7 +1,7 @@
 import { Center, Text, Heading, Stack, Grid } from '@chakra-ui/react';
 import type { MetaFunction, LoaderFunction } from 'remix';
 import { useLoaderData, Link } from 'remix';
-import {  } from '~/lib';
+import { getAllNotes } from '~/lib';
 import { Note } from '~/types';
 
 export const loader: LoaderFunction = async () => {
