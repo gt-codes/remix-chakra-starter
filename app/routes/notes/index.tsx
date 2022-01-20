@@ -1,15 +1,7 @@
 import { Button, Center, Text } from '@chakra-ui/react';
-import { Link, LoaderFunction, Outlet, useLoaderData } from 'remix';
-import { getAllUsers } from '~/lib';
-
-export const loader: LoaderFunction = async () => {
-	const users = await getAllUsers();
-	return users;
-};
+import { Link } from 'remix';
 
 export default function Index() {
-	const users = useLoaderData();
-
 	return (
 		<Center flexDir='column' w='full'>
 			<Text textAlign='center' fontWeight='bold' fontSize={32}>
@@ -23,7 +15,6 @@ export default function Index() {
 					Create a note
 				</Button>
 			</Link>
-			<Outlet context={users} />
 		</Center>
 	);
 }

@@ -35,7 +35,7 @@ export default function Notes() {
 				})}
 			</Stack>
 			<Flex p={24} h='full' w='full'>
-				<Outlet />
+				<Outlet context={data.map((el) => el.user)} />
 			</Flex>
 		</HStack>
 	);

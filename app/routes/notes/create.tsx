@@ -17,8 +17,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
-import { useOutletContext } from 'react-router';
-import { ActionFunction, Form, Link, redirect, useActionData, useNavigate, useTransition } from 'remix';
+import { ActionFunction, Form, redirect, useActionData, useNavigate, useTransition, useOutletContext } from 'remix';
 import { createNote } from '~/lib';
 
 interface Errors {
@@ -47,9 +46,8 @@ export default function create() {
 	const { onClose } = useDisclosure();
 	const initialFocus = useRef<HTMLSelectElement>(null);
 	const navigate = useNavigate();
-
+	const users = useOutletContext<any[]>();
 	const errors = useActionData<Errors>();
-	const users = useOutletContext();
 	const { state } = useTransition();
 
 	const loading = state === 'submitting';
@@ -60,7 +58,7 @@ export default function create() {
 
 	const handleClose = () => {
 		setIsOpen(false);
-		navigate('..');
+		setTimeout(() => navigate('..'), 150);
 	};
 
 	return (
@@ -69,15 +67,13 @@ export default function create() {
 			<ModalContent>
 				<Form action='.' method='post'>
 					<ModalHeader>New Note</ModalHeader>
-					<Link to='..'>
-						<ModalCloseButton onClick={handleClose} />
-					</Link>
+					<ModalCloseButton onClick={handleClose} />
 					<ModalBody>
 						<Stack spacing={4}>
 							<FormControl>
 								<FormLabel>User</FormLabel>
 								<Select ref={initialFocus} name='userId'>
-									{(users as any[])?.map((user: any) => (
+									{users?.map((user: any) => (
 										<option key={user.id} value={user.id}>
 											{user.name}
 										</option>
@@ -102,7 +98,7 @@ export default function create() {
 					</ModalBody>
 
 					<ModalFooter>
-						<Button type='button' colorScheme='gray' variant='ghost' mr={3} onClick={onClose}>
+						<Button type='button' colorScheme='gray' variant='ghost' mr={3} onClick={handleClose}>
 							Cancel
 						</Button>
 						<Button isLoading={loading} type='submit' colorScheme='blue'>
