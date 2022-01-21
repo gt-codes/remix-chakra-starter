@@ -17,7 +17,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
-import { ActionFunction, Form, redirect, useActionData, useNavigate, useTransition, useOutletContext } from 'remix';
+import { ActionFunction, Form, redirect, useActionData, useNavigate, useTransition, useOutletContext, useOutlet } from 'remix';
 import { createNote } from '~/lib';
 
 interface Errors {
@@ -49,6 +49,7 @@ export default function create() {
 	const users = useOutletContext<any[]>();
 	const errors = useActionData<Errors>();
 	const { state } = useTransition();
+	const childRoute = useOutlet();
 
 	const loading = state === 'submitting';
 
@@ -57,12 +58,11 @@ export default function create() {
 	}, [state]);
 
 	const handleClose = () => {
-		setIsOpen(false);
-		setTimeout(() => navigate('..'), 150);
+		navigate('..');
 	};
-
+	
 	return (
-		<Modal isOpen={isOpen} initialFocusRef={initialFocus} isCentered onClose={onClose} closeOnOverlayClick={false}>
+		<Modal isOpen={Boolean(childRoute)} initialFocusRef={initialFocus} isCentered onClose={onClose} closeOnOverlayClick={false}>
 			<ModalOverlay />
 			<ModalContent>
 				<Form action='.' method='post'>
